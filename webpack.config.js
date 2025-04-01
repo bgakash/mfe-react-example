@@ -25,6 +25,13 @@ module.exports = {
       remotes: {
         ButtonHost: "remoteApp@http://localhost:3001/remoteEntry.js",
       },
+      exposes: {
+        "./AppButton": "/src/components/AppButton.tsx",
+      },
+      shared: {
+        react: { singleton: true, eager: true },
+        "react-dom": { singleton: true, eager: true },
+      },
     }),
     new HtmlWebpackPlugin({
       template: "./index.html",

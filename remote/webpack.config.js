@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
@@ -24,12 +25,20 @@ module.exports = {
       exposes: {
         "./Button": "/src/components/Button.tsx",
       },
+      remotes: {
+        ButtonHost: "host@http://localhost:3000/remoteEntry.js",
+      },
       // shared: ["react", "react-dom"],
+      shared: {
+        react: { singleton: true, eager: true },
+        "react-dom": { singleton: true, eager: true },
+      },
     }),
     new HtmlWebpackPlugin({
       template: "./index.html",
       filename: "index.html",
     }),
+    new MiniCssExtractPlugin(),
   ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
@@ -41,6 +50,10 @@ module.exports = {
         use: "ts-loader",
         include: path.resolve(__dirname, "src"),
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },

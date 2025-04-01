@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { useState, Suspense, lazy } from "react";
 const ButtonElement = lazy(() => import("ButtonHost/Button"));
 import "@fontsource/open-sans/300.css";
 import "@fontsource/open-sans/300-italic.css";
@@ -17,7 +17,7 @@ import "@fontsource/pt-mono";
 const App = () => {
   return (
     <>
-      Host App
+      <h1>Host App</h1>
       <Suspense fallback="loading...">
         <ButtonElement></ButtonElement>
       </Suspense>
