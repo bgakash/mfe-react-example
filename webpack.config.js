@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
@@ -29,6 +30,7 @@ module.exports = {
       template: "./index.html",
       filename: "index.html",
     }),
+    new MiniCssExtractPlugin(),
   ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
@@ -40,6 +42,10 @@ module.exports = {
         use: "ts-loader",
         include: path.resolve(__dirname, "src"),
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
