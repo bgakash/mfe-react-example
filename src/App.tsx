@@ -3,12 +3,12 @@ const ButtonElement = lazy(() => import("ButtonHost/Button"));
 
 const App = () => {
   return (
-    <div>
+    <>
       Host App
       <Suspense fallback="loading...">
         <ButtonElement></ButtonElement>
       </Suspense>
-    </div>
+    </>
   );
 };
 

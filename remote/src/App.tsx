@@ -1,7 +1,7 @@
 import React from "react";
 
 const App = () => {
-  return <div>Remote</div>;
+  return <>Remote</>;
 };
 
 export default App;
